@@ -318,7 +318,18 @@ select {
   transform: scale(1.5);
 }
 
+/* Primary header */
+.logo {
+  margin: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+}
+
+.primary-header {
+  justify-content: space-between;
+  align-items: center;
+}
+
 .primary-navigation {
+  --gap: clamp(1.5rem, 5vw, 3.5rem);
   --underline-gap: 2rem;
   list-style: none;
   padding: 0;
@@ -336,6 +347,15 @@ select {
   }
 }
 
+.primary-navigation a {
+  text-decoration: none;
+}
+
+.primary-navigation a > span {
+  font-weight: 700;
+  margin-right: 0.5em;
+}
+
 .mobile-nav-toggle {
   display: none;
 }
@@ -351,7 +371,7 @@ select {
     margin: 0;
     flex-direction: column;
     transform: translateX(100%);
-    transition: all 0.3s ease-in-out;
+    transition: transform 500ms ease-in-out;
   }
 
   .primary-navigation[data-visible="visible"] {
@@ -363,33 +383,58 @@ select {
   }
 
   .mobile-nav-toggle {
-    cursor: pointer;
     display: block;
     position: absolute;
-    top: 2rem;
-    right: 2rem;
     z-index: 2000;
+    right: 1rem;
+    top: 2rem;
     background: transparent;
-    border: none;
     background-image: url("../assets/shared/icon-hamburger.svg");
     background-repeat: no-repeat;
     background-position: center;
     width: 1.5rem;
     aspect-ratio: 1;
+    border: 0;
   }
 
   .mobile-nav-toggle:focus-visible {
     outline: 5px solid white;
+    outline-offset: 5px;
   }
 }
 
-.primary-navigation a {
-  text-decoration: none;
+@media (min-width: 35rem) {
+  .primary-navigation {
+    padding-inline: clamp(3rem, 5vw, 7rem);
+  }
 }
 
-.primary-navigation a > span {
-  font-weight: 700;
-  margin-right: 0.5em;
+@media (min-width: 35em) and (max-width: 44.999em) {
+  .primary-header a > span {
+    display: none;
+  }
+}
+
+@media (min-width: 45rem) {
+  /* gray line between logo and nav links */
+  .primary-header::before {
+    content: "";
+    display: block;
+    position: relative;
+    height: 1px;
+    width: 100%;
+    margin-right: -2.5rem;
+    background: hsl(var(--clr-white) / 0.25);
+    order: 1;
+  }
+
+  nav {
+    order: 2;
+  }
+
+  .primary-navigation {
+    margin-block: 2rem;
+  }
 }
 
 .underline-indicators > * {
