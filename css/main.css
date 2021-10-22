@@ -10,12 +10,12 @@
   --clr-white: 0 0% 100%;
 
   /* Font sizes */
-  --fs-900: 9.375rem;
-  --fs-800: 6.25rem;
-  --fs-700: 3.5rem;
-  --fs-600: 2rem;
+  --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
+  --fs-800: 3.5rem;
+  --fs-700: 1.5rem;
+  --fs-600: 1rem;
   --fs-500: 1.75rem;
-  --fs-400: 1.125rem;
+  --fs-400: 0.9375rem;
   --fs-300: 1rem;
   --fs-200: 0.875rem;
 
@@ -23,6 +23,26 @@
   --ff-serif: "Bellefair", serif;
   --ff-sans-cond: "Barlow Condensed", sans-serif;
   --ff-sans-normal: "Barlow", sans-serif;
+}
+
+@media (min-width: 35em) {
+  :root {
+    /* Font sizes */
+    --fs-800: 5rem;
+    --fs-700: 2.5rem;
+    --fs-600: 1.5rem;
+    --fs-400: 1rem;
+  }
+}
+
+@media (min-width: 45em) {
+  :root {
+    /* Font sizes */
+    --fs-800: 6.25rem;
+    --fs-700: 3.5rem;
+    --fs-600: 2rem;
+    --fs-400: 1.125rem;
+  }
 }
 
 /* ************************
@@ -66,6 +86,9 @@ body {
   background-color: hsl(var(--clr-dark));
   line-height: 1.5;
   min-height: 100vh;
+
+  display: grid;
+  grid-template-rows: min-content 1fr;
 }
 
 /* Images */
@@ -108,6 +131,10 @@ select {
   gap: var(--gap, 1rem); /* use (--gap), if not available then use 1rem */
 }
 
+.d-block {
+  display: block;
+}
+
 /* ` * + * ` => Apply to anything that's not the first child */
 /* .flow > * + * { */
 .flow > *:where(:not(:first-child)) {
@@ -118,6 +145,41 @@ select {
   padding-inline: 2em;
   margin-inline: auto;
   max-width: 80rem;
+}
+
+.grid-container {
+  text-align: center;
+  display: grid;
+  place-items: center;
+  padding-inline: 1rem;
+}
+
+.grid-container * {
+  max-width: 50ch;
+}
+
+@media (min-width: 45em) {
+  .grid-container {
+    text-align: left;
+    column-gap: var(--container-gap, 2rem);
+    grid-template-columns: minmax(1rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(
+        1rem,
+        1fr
+      );
+  }
+
+  .grid-container > *:first-child {
+    grid-column: 2;
+  }
+
+  .grid-container > *:last-child {
+    grid-column: 3;
+  }
+
+  .grid-container--home {
+    padding-bottom: max(6rem, 20vh);
+    align-items: end;
+  }
 }
 
 /* Screen Reader ONLY */
@@ -224,8 +286,9 @@ select {
         COMPONENTS
 ************************ */
 .large-button {
+  font-size: 2rem;
   position: relative;
-  display: grid;
+  display: inline-grid;
   z-index: 1;
   place-content: center;
   padding: 0 2em;
@@ -330,4 +393,29 @@ select {
 
 .number-indicators > [aria-selected="true"] {
   background-color: hsl(var(--clr-white) / 1);
+}
+
+/* ************************
+        HOME PAGE SPECIFIC
+************************ */
+body {
+  background-size: cover;
+  background-position: bottom center;
+}
+
+.home {
+  background-image: url("../assets/home/background-home-mobile.jpg");
+}
+
+@media (min-width: 35em) {
+  .home {
+    background-position: center center;
+    background-image: url("../assets/home/background-home-tablet.jpg");
+  }
+}
+
+@media (min-width: 45em) {
+  .home {
+    background-image: url("../assets/home/background-home-desktop.jpg");
+  }
 }
