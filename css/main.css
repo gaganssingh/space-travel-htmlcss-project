@@ -197,6 +197,24 @@ select {
   border: 0;
 }
 
+.skip-to-content {
+  position: absolute;
+  z-index: 9999;
+  background: hsl(var(--clr-white));
+  color: hsl(var(--clr-dark));
+  text-decoration: none;
+  padding: 0.5em 1em;
+  margin-inline: auto;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.skip-to-content:focus {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 /* Colors */
 .bg-dark {
   background-color: hsl(var(--clr-dark));
@@ -417,7 +435,7 @@ select {
 
 @media (min-width: 45rem) {
   /* gray line between logo and nav links */
-  .primary-header::before {
+  .primary-header::after {
     content: "";
     display: block;
     position: relative;
